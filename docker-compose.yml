@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:12.1
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports: 
+      - '5432:5432'
+    volumes:
+      - search-city-postgres:/var/lib/postgresql/data
+
+  search-city:
+    build:
+      context: .
+      args:
+        USER_ID: "${USER_ID:-1000}"
+        GROUP_ID: "${GROUP_ID:-1000}"
+    depends_on:
+      - postgres
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/app/search-city
+    ports:
+      - '8010:8010'
+    env_file:
+      - .env
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.nginx
+    depends_on:
+      - search-city
+    ports:
+      - '80:8020'
+
+volumes:
+  search-city-postgres:
