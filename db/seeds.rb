@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-states = ['Paraná', 'Santa Catarina', 'Rio Grande do Sul']
+states = { 'PR' => 'Paraná', 'SC' => 'Santa Catarina', 'RS' => 'Rio Grande do Sul'}
 
 parana = ['Curitiba', 'Lodrina', 'Foz do Iguaçu']
 santa_catarina = ['Florianópolis', 'Joinville', 'Blumenau']
@@ -16,8 +16,8 @@ rio_grande = ['Porto Alegre', 'Caxia do Sul', 'Venâncio Aires']
 
 state_cities = { 'Paraná' => parana, 'Santa Catarina' => santa_catarina, 'Rio Grande do Sul' => rio_grande }
 
-states.each do |state_name|
-  state = State.create name: state_name
+states.each do |uf, state_name|
+  state = State.create name: state_name, uf: uf
   (0..2).each do |x|
     City.create state_id: state.id, name: state_cities[state_name][x]
   end

@@ -12,7 +12,6 @@ class CitiesController < ApplicationController
       @cities = City.all
     else
       @cities = City.search(params)
-      render 'search'
     end
   end
 end
