@@ -31,4 +31,4 @@ LISTEN_ON=0.0.0.0:8010
 # containers.
 #
 # Everything else is standard Rails configuration for a PostgreSQL database.
-DATABASE_URL=postgresql://arca-app:arca_app@postgres:5432/arca-app?encoding=utf8&pool=5&timeout=5000
+DATABASE_URL=postgresql://db_username:db_password@hostname:port_number/db_name?encoding=utf8&pool=5&timeout=5000
